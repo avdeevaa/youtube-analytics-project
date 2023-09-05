@@ -1,14 +1,15 @@
 import json
 import os
 
-# необходимо установить через: pip install google-api-python-client
+# необходимо установить через: pip install
 from googleapiclient.discovery import build
 
 import isodate
 
 
 # YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.getenv('YT_API_KEY')
+# api_key: str = os.getenv('YT_API_KEY')
+api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4" # сейчас я не могу установить API KEY в переменные окружения, но принцип я поняла
 
 # создать специальный объект для работы с API
 youtube = build('youtube', 'v3', developerKey=api_key)
