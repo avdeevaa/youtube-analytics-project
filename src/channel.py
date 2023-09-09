@@ -8,7 +8,10 @@ import isodate
 class Channel:
     """Класс для ютуб-канала"""
 
-    api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+    # api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+    # youtube = build('youtube', 'v3', developerKey=api_key)
+
+    api_key: str = os.getenv('API_YOUTUBE')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
     def __init__(self, channel_id: str) -> None:
@@ -45,7 +48,8 @@ class Channel:
     @classmethod
     def get_service(cls):
         """возвращает объект для работы с YouTube API"""
-        api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+        # api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+        api_key: str = os.getenv('API_YOUTUBE')
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
 
