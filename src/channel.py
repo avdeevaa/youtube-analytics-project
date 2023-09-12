@@ -8,9 +8,6 @@ import isodate
 class Channel:
     """Класс для ютуб-канала"""
 
-    # api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
-    # youtube = build('youtube', 'v3', developerKey=api_key)
-
     api_key: str = os.getenv('API_YOUTUBE')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
@@ -32,6 +29,40 @@ class Channel:
         self.video_count = video_response['items'][0]['statistics']['videoCount'] # количество видео
         self.channel_views = video_response['items'][0]['statistics']['viewCount'] # общее количество просмотров
 
+    def __str__(self):
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other):
+        """прибавление"""
+        return int(self.channel_followers) + int(other.channel_followers)
+
+    def __sub__(self, other):
+        """вычитание"""
+        return int(self.channel_followers) - int(other.channel_followers)
+
+    def __mul__(self, other):
+        """умножение"""
+        return int(self.channel_followers) * int(other.channel_followers)
+
+    def __truediv__(self, other):
+        """деление"""
+        return int(self.channel_followers) / int(other.channel_followers)
+
+    def __lt__(self, other):
+        """меньше"""
+        return self.channel_followers < other.channel_followers
+
+    def __le__(self, other):
+        """меньше или равно"""
+        return self.channel_followers <= other.channel_followers
+
+    def __gt__(self, other):
+        """больше"""
+        return self.channel_followers > other.channel_followers
+
+    def __ge__(self, other):
+        """больше или равно"""
+        return self.channel_followers >= other.channel_followers
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -48,7 +79,7 @@ class Channel:
     @classmethod
     def get_service(cls):
         """возвращает объект для работы с YouTube API"""
-        # api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+
         api_key: str = os.getenv('API_YOUTUBE')
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
