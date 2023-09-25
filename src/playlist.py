@@ -10,10 +10,7 @@ import datetime
 class PlayList:
     """класс для плейлиста"""
 
-    # api_key: str = os.getenv('API_YOUTUBE')
-    # youtube = build('youtube', 'v3', developerKey=api_key)
-
-    api_key = "AIzaSyDPB_Ed33-S5rIPo_Aw8cPoMwkvYX95bM4"  # сейчас я не могу установить API KEY в переменные окружения из-за компьютера, но принцип я поняла
+    api_key: str = os.getenv('API_YOUTUBE')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
 
