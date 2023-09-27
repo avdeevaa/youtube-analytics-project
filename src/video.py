@@ -12,19 +12,27 @@ class Video:
     youtube = build('youtube', 'v3', developerKey=api_key)
 
     def __init__(self, video_id):
-        self.id_video = video_id
-        videos_response = Video.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
-                                               id=video_id
-                                               ).execute()
-        self.videos_response = videos_response
+        try:
+            self.id_video = video_id
+            videos_response = Video.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
+                                                   id=video_id
+                                                   ).execute()
+            self.videos_response = videos_response
 
-        json_load_from_api = json.dumps(self.videos_response, indent=2, ensure_ascii=False)
-        video_response = json.loads(json_load_from_api)
+            json_load_from_api = json.dumps(self.videos_response, indent=2, ensure_ascii=False)
+            video_response = json.loads(json_load_from_api)
 
-        self.video_title = video_response['items'][0]['snippet']['title'] # название видео
-        self.video_url = video_response['items'][0]['snippet']['thumbnails']['default']['url']# ссылка на видео
-        self.view_count = video_response['items'][0]['statistics']['viewCount'] # количество просмотров
-        self.like_count = video_response['items'][0]['statistics']['likeCount'] # количество лайков
+            self.video_title = video_response['items'][0]['snippet']['title'] # название видео
+            self.video_url = video_response['items'][0]['snippet']['thumbnails']['default']['url']# ссылка на видео
+            self.view_count = video_response['items'][0]['statistics']['viewCount'] # количество просмотров
+            self.like_count = video_response['items'][0]['statistics']['likeCount'] # количество лайков
+
+        except IndexError:
+            self.id_video = video_id
+            self.video_title = None
+            self.video_url = None
+            self.view_count = None
+            self.like_count = None
 
     def __str__(self):
         return self.video_title
